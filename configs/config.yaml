@@ -1,0 +1,10 @@
+listen: ":8080"
+
+backends:
+  - "http://127.0.0.1:8001"
+  - "http://127.0.0.1:8002"
+  - "http://127.0.0.1:8003"
+
+health:
+  path: /health
+  every: 5s
