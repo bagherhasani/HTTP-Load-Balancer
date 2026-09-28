@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="280" viewBox="0 0 640 280">
+  <rect width="640" height="280" fill="#fff"/>
+  <text x="24" y="28" font-family="ui-monospace, Menlo, monospace" font-size="13" fill="#222">request path</text>
+
+  <rect x="24" y="110" width="90" height="44" fill="none" stroke="#222" stroke-width="1.5"/>
+  <text x="69" y="137" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="13" fill="#222">client</text>
+
+  <line x1="114" y1="132" x2="186" y2="132" stroke="#222" stroke-width="1.5"/>
+  <polygon points="186,128 198,132 186,136" fill="#222"/>
+
+  <rect x="198" y="100" width="130" height="64" fill="none" stroke="#222" stroke-width="1.5"/>
+  <text x="263" y="126" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="13" fill="#222">lb :8080</text>
+  <text x="263" y="146" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="11" fill="#555">round-robin</text>
+
+  <line x1="328" y1="118" x2="400" y2="70" stroke="#222" stroke-width="1.5"/>
+  <polygon points="396,76 400,70 404,78" fill="#222"/>
+  <text x="348" y="82" font-family="ui-monospace, Menlo, monospace" font-size="11" fill="#555">1</text>
+
+  <line x1="328" y1="132" x2="400" y2="132" stroke="#999" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <text x="348" y="126" font-family="ui-monospace, Menlo, monospace" font-size="11" fill="#999">skip</text>
+
+  <line x1="328" y1="146" x2="400" y2="194" stroke="#222" stroke-width="1.5"/>
+  <polygon points="396,186 400,194 404,188" fill="#222"/>
+  <text x="348" y="186" font-family="ui-monospace, Menlo, monospace" font-size="11" fill="#555">2</text>
+
+  <rect x="400" y="48" width="200" height="40" fill="none" stroke="#222" stroke-width="1.5"/>
+  <text x="500" y="73" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="13" fill="#222">:8001  up</text>
+
+  <rect x="400" y="112" width="200" height="40" fill="none" stroke="#999" stroke-width="1.5"/>
+  <text x="500" y="137" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="13" fill="#777">:8002  /health fail</text>
+
+  <rect x="400" y="176" width="200" height="40" fill="none" stroke="#222" stroke-width="1.5"/>
+  <text x="500" y="201" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="13" fill="#222">:8003  up</text>
+
+  <text x="24" y="250" font-family="ui-monospace, Menlo, monospace" font-size="11" fill="#555">GET /health every 5s. fail = out of rotation until it answers 200 again.</text>
+</svg>

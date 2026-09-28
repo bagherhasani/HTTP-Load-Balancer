@@ -1,16 +1,49 @@
 # HTTP Load Balancer
 
-Go program that sits in front of a few HTTP servers. Each request goes to the next backend (round-robin). If a server fails a health check, it stops getting traffic until it is healthy again.
+Go reverse proxy. One listen port, a list of backends, round-robin between
+the ones that are up. A loop hits `GET /health`; a non-200 takes that
+server out until it comes back.
 
-Linux. Docker for running this next to a couple of backends on one machine.
+![request path](docs/flow.svg)
 
 ```
-cmd/lb              the process you start
-internal/backend    one backend
-internal/pool       round-robin + who is healthy
-demo                fake servers for trying it locally
-configs             listen port, backend list, health check
-deploy              Docker
+client --> :8080 --> :8001
+                 --> :8002  (down, skipped)
+                 --> :8003
 ```
 
-No code in here yet.
+## Run
+
+Three terminals for the dummy servers:
+
+```
+go run ./demo -name a -port 8001
+go run ./demo -name b -port 8002
+go run ./demo -name c -port 8003
+```
+
+Then:
+
+```
+go run ./cmd/lb -config configs/config.yaml
+curl localhost:8080
+```
+
+You should see `a`, `b`, `c` in order. Kill one demo process. The next
+curls should miss that name. Start it again and it shows back up after
+the next health check (5s).
+
+```
+go test ./...
+```
+
+## Layout
+
+```
+cmd/lb              listen + proxy + health loop
+internal/backend    one server + its reverse proxy
+internal/pool       next healthy backend
+demo                tiny HTTP servers for local testing
+configs/config.yaml listen, backends, health path/interval
+docs/flow.svg
+```
